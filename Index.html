@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Center Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-container img {
+            display: block;
+            margin: 0 auto 20px auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group textarea {
+            height: 80px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+        .form-group button.secondary {
+            background-color: #007bff;
+            margin-top: 10px;
+        }
+        .form-group button.secondary:hover {
+            background-color: #0056b3;
+        }
+        .form-group button.new-queries {
+            background-color: #ffc107;
+            margin-top: 20px;
+        }
+        .form-group button.new-queries:hover {
+            background-color: #e0a800;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- First Page -->
+    <div id="page1" class="form-container">
+        <img src="call-center-icon.png" alt="Call Center Icon" width="100">
+        <h2>Complaints & Queries</h2>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="mobile">Mobile Number:</label>
+            <input type="text" id="mobile" name="mobile" required>
+        </div>
+        <div class="form-group">
+            <label for="complaint">Complaint/Queries:</label>
+            <textarea id="complaint" name="complaint" required></textarea>
+        </div>
+        <div class="form-group">
+            <button onclick="showPage2()">Next</button>
+        </div>
+    </div>
+
+    <!-- Second Page -->
+    <div id="page2" class="form-container hidden">
+        <h2>Payment Options</h2>
+        <div class="form-group">
+            <button onclick="showCreditDebitCard()">Credit/Debit Card</button>
+            <button onclick="showNetBanking()">NetBanking</button>
+            <button onclick="showUPI()">UPI</button>
+            <button onclick="showOthers()">Others</button>
+        </div>
+    </div>
+
+    <!-- Credit/Debit Card Page -->
+    <div id="creditDebitCard" class="form-container hidden">
+        <h2>Credit/Debit Card Payment</h2>
+        <div class="form-group">
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" required>
+        </div>
+        <div class="form-group">
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+        </div>
+        <div class="form-group">
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required>
+        </div>
+        <div class="form-group">
+            <button onclick="showSuccessMessage()">Submit</button>
+        </div>
+    </div>
+
+    <!-- NetBanking Page -->
+    <div id="netBanking" class="form-container hidden">
+        <h2>NetBanking</h2>
+        <div class="form-group">
+            <label for="userId">User ID:</label>
+            <input type="text" id="userId" name="userId" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <button onclick="showSuccessMessage()">Submit</button>
+        </div>
+    </div>
+
+    <!-- UPI Page -->
+    <div id="upi" class="form-container hidden">
+        <h2>UPI Payment</h2>
+        <div class="form-group">
+            <label for="upiId">Verify your UPI ID:</label>
+            <input type="text" id="upiId" name="upiId" required>
+        </div>
+        <div class="form-group">
+            <button onclick="showSuccessMessage()">Submit</button>
+        </div>
+    </div>
+
+    <!-- Others Page -->
+    <div id="others" class="form-container hidden">
+        <h2>Other Payment Options</h2>
+        <div class="form-group">
+            <label for="otherOption">Please specify:</label>
+            <input type="text" id="otherOption" name="otherOption" required>
+        </div>
+        <div class="form-group">
+            <button onclick="showSuccessMessage()">Submit</button>
+        </div>
+    </div>
+
+    <!-- Success Page -->
+    <div id="successPage" class="form-container hidden">
+        <h2>Success!</h2>
+        <p>Thank you for reaching out, Your request will be processed shortly. Your reference number is: <strong>#RB6391TR402610M</strong></p>
+        <div class="form-group">
+            <button class="new-queries" onclick="showPage1()">New Queries</button>
+        </div>
+    </div>
+
+    <script>
+        function showPage1() {
+            hideAllPages();
+            document.getElementById('page1').classList.remove('hidden');
+        }
+
+        function showPage2() {
+            hideAllPages();
+            document.getElementById('page2').classList.remove('hidden');
+        }
+
+        function showCreditDebitCard() {
+            hideAllPages();
+            document.getElementById('creditDebitCard').classList.remove('hidden');
+        }
+
+        function showNetBanking() {
+            hideAllPages();
+            document.getElementById('netBanking').classList.remove('hidden');
+        }
+
+        function showUPI() {
+            hideAllPages();
+            document.getElementById('upi').classList.remove('hidden');
+        }
+
+        function showOthers() {
+            hideAllPages();
+            document.getElementById('others').classList.remove('hidden');
+        }
+
+        function showSuccessMessage() {
+            hideAllPages();
+            setTimeout(function() {
+                document.getElementById('successPage').classList.remove('hidden');
+            }, 5000); // 5 minutes timer
+        }
+
+        function hideAllPages() {
+            var pages = document.querySelectorAll('.form-container');
+            pages.forEach(function(page) {
+                page.classList.add('hidden');
+            });
+        }
+    </script>
+
+</body>
+</html>
